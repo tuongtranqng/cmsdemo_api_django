@@ -9,6 +9,7 @@ djangorestframework = "*"
 reportlab = "*"
 django-cors-headers = "*"
 gunicorn = "*"
+drf-spectacular = "*"
 
 [dev-packages]
 
