@@ -7,6 +7,7 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 reportlab = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
