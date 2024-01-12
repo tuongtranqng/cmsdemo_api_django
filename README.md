@@ -6,6 +6,16 @@ This project implements Rest APIs for a simple application used for managing cla
 
 ## How to run the app with Docker
 
+Just run the app with docker compose.
+
+```
+docker compose up
+```
+
+The app now should run at http://127.0.0.1:8000.  
+Swagger UI: http://127.0.0.1:8000/docs/swagger-ui/.  
+Redoc: http://127.0.0.1:8000/docs/redoc/.
+
 ## How to run the app without Docker
 
 ### Prerequisites
@@ -35,18 +45,9 @@ pipenv sync
 pipenv shell
 ```
 
-4. Create .env file
+4. Create .env file (optional)
 
-    Create file .env in the project root, copy content from .env.example  
-    Modify below environment variables to specify the database information:  
-    
-    - CMSDEMO_DB_HOST
-    - CMSDEMO_DB_PORT
-    - CMSDEMO_DB_NAME
-    - CMSDEMO_DB_USER
-    - CMSDEMO_DB_PASSWORD
-
-    Modifying other environment variables is optional.
+    Create file .env in the project root, copy content from .env.example and modify it to change the app configuration.
 
 5. Migrate database
 ```
