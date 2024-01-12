@@ -21,7 +21,10 @@ class ClassTestCase(APITestCase):
         url = '/api/classes/'
         data = {
             'name': 'New Class',
-            'teacher': f'/api/teachers/{self.teacher1.pk}/'
+            'teacher': f'/api/teachers/{self.teacher1.pk}/',
+            'students': [
+                f'/api/students/{self.student1.pk}/'
+            ]
         }
         self.client.post(url, data)
         self.assertEqual(Class.objects.count(), 2)
@@ -34,8 +37,11 @@ class ClassTestCase(APITestCase):
         expected_result = [
             {
                 'url': ANY,
+                'id': ANY,
                 'name': self.class1.name,
-                'teacher': ANY
+                'teacher': ANY,
+                'teacher_name': ANY,
+                'student_count': ANY
             }
         ]
         self.assertEqual(response.data, expected_result)
@@ -45,8 +51,11 @@ class ClassTestCase(APITestCase):
         response = self.client.get(url)
         expected_result = {
             'url': ANY,
+            'id': ANY,
             'name': self.class1.name,
-            'teacher': ANY
+            'teacher': ANY,
+            'teacher_name': ANY,
+            'student_count': ANY
         }
         self.assertEqual(response.data, expected_result)
 
@@ -55,7 +64,10 @@ class ClassTestCase(APITestCase):
         url = f'/api/classes/{self.class1.pk}/'
         data = {
             'name': 'Class 1 Updated',
-            'teacher': f'/api/teachers/{self.teacher1.pk}/'
+            'teacher': f'/api/teachers/{self.teacher1.pk}/',
+            'students': [
+                f'/api/students/{self.student1.pk}/'
+            ]
         }
         self.client.put(url, data)
         self.assertEqual(Class.objects.get().name, 'Class 1 Updated')

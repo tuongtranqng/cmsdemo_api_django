@@ -41,15 +41,17 @@ class ClassSerializer(serializers.HyperlinkedModelSerializer):
         return new_class
     
     def update(self, instance, validated_data):
-        students = validated_data['students']
-        del validated_data['students']
+        students = validated_data.get('students')
+        if students:
+            del validated_data['students']
         updated_class = super().update(instance, validated_data)
 
         # Update students
-        Student.objects.filter(cclass=updated_class).update(cclass=None)
-        for stu in students:
-            stu.cclass = updated_class
-            stu.save()
+        if students:
+            Student.objects.filter(cclass=updated_class).update(cclass=None)
+            for stu in students:
+                stu.cclass = updated_class
+                stu.save()
 
         return updated_class
 
